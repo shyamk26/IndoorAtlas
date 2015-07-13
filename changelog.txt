@@ -1,0 +1,58 @@
+IndoorAtlas iOS SDK
+
+-- Changelog --
+Legend:
+  @: optimization
+  +: new feature
+  #: bug fix
+  -: removed feature
+  *: note
+
+v.1.4.1-beta:
+  +: SDK now depends on libz.dylib.
+  +: Automatic background sensor calibration. Required time and device movement for reaching full
+     calibration has been greatly reduced. See, <IndoorAtlasBackgroundCalbrator>
+  +: Because calibration is maintained continuously, positioning can be started immediately
+     without an initial calibration movement.
+  +: Added width and height properties to IndoorAtlasFloorplan.
+  -: Image format string from "fetchFloorplanImage:" completion block was removed.
+  -: Removed explicit calibration.
+  -: Removed deprecated background calibrator API methods.
+  #: Added libicucore.dylib to the getting started guide.
+  #: Internal bug fixes.
+
+v1.3.0-beta:
+  +: Introduce connect, prepare, prepareWithParameters, startWithParameters
+     methods to IndoorAtlasPositioner.
+  +: IndoorAtlasPositioner now exposes more state.
+     'connecting', 'connected', 'loading', 'ready', 'waitingForFix'
+  +: Introduce calibrateUsingBackgroundCalibrator method to
+     IndoorAtlasCalibrator. Use this method to get similar calibration as in
+     IndoorAtlas Appstore application 'First Calibration' view.
+  +: Added possibility to submit explicit position.
+  *: Implementing background calibrator delegate will now emit StateChanged:
+     method immediately.
+  *: Changed background calibrator API, update your delegate implementations
+     to use the new method "indoorAtlasBackgroundCalibratorStateChanged:".
+  *: Renamed kIndoorAtlasErrorCalibrationValidation ->
+     kIndoorAtlasErrorCalibrationFailed
+  *: Renamed kIndoorAtlasErrorCouldNotGetLocationFix ->
+     kIndoorAtlasErrorCouldNotGetPosition
+  -: needsCalibration was deprecated in favor of calibrationStatus.
+  -: Removed probability from the API, use radius parameter instead in
+     IndoorAtlasPosition.
+
+v1.1.1-beta:
+  +: Added possibility to get center geocoordinate of floorplan.
+  #: Fixed bug where positioner sent IndoorAtlasPosition instances with only
+     longitudinal coordinates.
+
+v1.1.0-beta:
+  +: Websocket communication.
+  +: Added IndoorAtlasFetch protocol.
+  +: Added progress blocks for some fetch methods.
+  +: Added background calibrator protocol.
+  -: Deprecated probability for radius in IndoorAtlasPosition class.
+
+v1.0.0-beta:
+  *: Initial beta.
